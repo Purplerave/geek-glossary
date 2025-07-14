@@ -6,9 +6,9 @@ type Props = {
   searchParams?: { [key: string]: string | string[] | undefined };
 };
 
-export async function generateStaticParams(): Promise<{ slug: string }[]> {
+export async function generateStaticParams(): Promise<any[]> {
   const slugs = getAllTermSlugs();
-  return slugs.map(s => s.params);
+  return slugs;
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
