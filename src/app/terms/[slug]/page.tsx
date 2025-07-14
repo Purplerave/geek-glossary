@@ -8,7 +8,7 @@ type Props = {
 
 export async function generateStaticParams() {
   const slugs = getAllTermSlugs();
-  return slugs;
+  return slugs.map(s => s.params);
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
