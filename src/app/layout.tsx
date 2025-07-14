@@ -29,9 +29,9 @@ export default function RootLayout({
       >
         <header className="bg-gray-800 text-white p-4">
           <nav className="container mx-auto flex justify-between items-center">
-            <a href="/" className="text-2xl font-bold">
+            <Link href="/" className="text-2xl font-bold">
               Geek Glossary
-            </a>
+            </Link>
           </nav>
         </header>
         <main className="container mx-auto p-4">
