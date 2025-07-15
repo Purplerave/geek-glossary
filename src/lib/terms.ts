@@ -12,14 +12,21 @@ export function getAllTermSlugs() {
   }));
 }
 
-export function getTermData(slug: string) {
+import { Term } from './types';
+
+// ... (resto del código)
+
+export function getTermData(slug: string): Term | undefined {
   const fullPath = path.join(termsDirectory, `${slug}.md`);
+  if (!fs.existsSync(fullPath)) {
+    return undefined;
+  }
   const fileContents = fs.readFileSync(fullPath, 'utf8');
   const matterResult = matter(fileContents);
 
   return {
     slug,
     content: matterResult.content,
-    ...matterResult.data,
-  };
+    ...(matterResult.data as Omit<Term, 'content' | 'slug'>)
+  } as Term;
 }
