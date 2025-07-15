@@ -10,7 +10,9 @@ export function getAllTermSlugs() {
   const fileNames = fs.readdirSync(termsDirectory);
   return fileNames.map((fileName) => {
     return {
-      slug: fileName.replace(/\.md$/, ''),
+      params: {
+        slug: fileName.replace(/\.md$/, ''),
+      },
     };
   });
 }
