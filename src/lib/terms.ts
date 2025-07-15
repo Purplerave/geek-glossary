@@ -1,32 +1,12 @@
-import fs from 'fs';
-import path from 'path';
-import matter from 'gray-matter';
+import { remark } from 'remark';
+import html from 'remark-html';
 
-const termsDirectory = path.join(process.cwd(), 'src', 'content', 'terms');
+// This file will now only contain client-side compatible utilities if needed
+// For now, it's just a placeholder for remark/html processing
 
-export function getAllTermSlugs() {
-  const fileNames = fs.readdirSync(termsDirectory);
-
-  return fileNames.map((fileName) => ({
-    slug: fileName.replace(/\.md$/, ''),
-  }));
-}
-
-import { Term } from './types';
-
-// ... (resto del código)
-
-export function getTermData(slug: string): Term | undefined {
-  const fullPath = path.join(termsDirectory, `${slug}.md`);
-  if (!fs.existsSync(fullPath)) {
-    return undefined;
-  }
-  const fileContents = fs.readFileSync(fullPath, 'utf8');
-  const matterResult = matter(fileContents);
-
-  return {
-    slug,
-    content: matterResult.content,
-    ...(matterResult.data as Omit<Term, 'content' | 'slug'>)
-  } as Term;
+export async function processMarkdownToHtml(markdownContent: string): Promise<string> {
+  const processedContent = await remark()
+    .use(html)
+    .process(markdownContent);
+  return processedContent.toString();
 }

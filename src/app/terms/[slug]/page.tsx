@@ -1,9 +1,8 @@
-import { getAllTermSlugs, getTermData } from '@/lib/terms';
+import { getAllTermSlugs, getTermData } from '@/lib/server-utils';
 import { notFound } from 'next/navigation';
 import { Metadata } from 'next';
 import { Term } from '@/lib/types';
-import { remark } from 'remark';
-import html from 'remark-html';
+import { processMarkdownToHtml } from '@/lib/terms';
 
 type PageProps = {
   params: {
@@ -32,10 +31,7 @@ export default async function TermPage({ params }: PageProps) {
     notFound();
   }
 
-  const processedContent = await remark()
-    .use(html)
-    .process(term.content);
-  const contentHtml = processedContent.toString();
+  const contentHtml = await processMarkdownToHtml(term.content);
 
   return (
     <main className="p-6">
