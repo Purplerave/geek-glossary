@@ -1,0 +1,16 @@
+[build]
+  command = "npm run build"
+  publish = ".next"
+
+[[plugins]]
+  package = "@netlify/plugin-nextjs"
+
+[functions]
+  node_bundler = "esbuild"
+
+[build.environment]
+  # Use the experimental Netlify Next.js Runtime
+  NEXT_PRIVATE_TARGET = "server"
+  NEXT_PRIVATE_STANDALONE = "true"
+  # Set a specific Node.js version for Netlify Functions
+  NODE_VERSION = "20.11.1"
