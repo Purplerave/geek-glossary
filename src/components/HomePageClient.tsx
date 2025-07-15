@@ -2,16 +2,19 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import Fuse from "fuse.js";
+import { SearchTerm } from "@/lib/types";
 
-interface SearchTerm {
-  slug: string;
-  title: string;
-  description: string;
-}
+// ... (resto del código)
 
 export default function HomePageClient({ allTermsData }: { allTermsData: SearchTerm[] }) {
   const [searchTerm, setSearchTerm] = useState("");
   const [filteredTerms, setFilteredTerms] = useState<SearchTerm[]>(allTermsData);
+
+  const fuse = new Fuse(allTermsData, {
+    keys: ["title", "description"],
+    threshold: 0.3, // Ajusta este valor para controlar la "tolerancia" de la búsqueda difusa
+  });
 
   useEffect(() => {
     if (searchTerm === "") {
@@ -19,14 +22,9 @@ export default function HomePageClient({ allTermsData }: { allTermsData: SearchT
       return;
     }
 
-    const lowercasedSearchTerm = searchTerm.toLowerCase();
-    const results = allTermsData.filter(
-      (term) =>
-        term.title.toLowerCase().includes(lowercasedSearchTerm) ||
-        term.description.toLowerCase().includes(lowercasedSearchTerm)
-    );
+    const results = fuse.search(searchTerm).map((result) => result.item);
     setFilteredTerms(results);
-  }, [searchTerm, allTermsData]);
+  }, [searchTerm, allTermsData, fuse]);
 
   return (
     <div className="container mx-auto p-4">

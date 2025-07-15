@@ -1,11 +1,6 @@
 import { getAllTermsForSearchIndex } from "@/lib/server-utils";
 import HomePageClient from "@/components/HomePageClient";
-
-interface SearchTerm {
-  slug: string;
-  title: string;
-  description: string;
-}
+import { SearchTerm } from "@/lib/types";
 
 export default async function Home() {
   const allTermsData: SearchTerm[] = await getAllTermsForSearchIndex();

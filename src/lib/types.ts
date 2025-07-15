@@ -6,3 +6,9 @@ export interface Term {
   imagePrompt?: string;
   amazonKeywords?: string[];
 }
+
+export interface SearchTerm {
+  slug: string;
+  title: string;
+  description: string;
+}
