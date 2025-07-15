@@ -6,15 +6,11 @@ import html from 'remark-html';
 
 const termsDirectory = path.join(process.cwd(), 'src', 'content', 'terms');
 
-export function getAllTermSlugs() {
+export function getAllTermSlugs(): Array<{ params: { slug: string } }> {
   const fileNames = fs.readdirSync(termsDirectory);
-  return fileNames.map((fileName) => {
-    return {
-      params: {
-        slug: fileName.replace(/\.md$/, ''),
-      },
-    };
-  });
+  return fileNames.map((fileName) => ({
+    params: { slug: fileName.replace(/\.md$/, '') },
+  }));
 }
 
 export async function getTermData(slug: string) {
