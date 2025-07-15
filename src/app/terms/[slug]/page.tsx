@@ -34,27 +34,28 @@ export default async function TermPage({ params }: PageProps) {
   const contentHtml = await processMarkdownToHtml(term.content);
 
   return (
-    <main className="p-6">
-      <h1 className="text-3xl font-bold mb-4">{term.title}</h1>
-      <article className="prose max-w-none">
+    <main className="p-6 bg-gray-800 rounded-lg shadow-xl">
+      <h1 className="text-4xl font-extrabold mb-4 text-purple-400">{term.title}</h1>
+      <article className="prose prose-invert max-w-none text-gray-200">
         <div dangerouslySetInnerHTML={{ __html: contentHtml }} />
       </article>
 
-      <div className="mt-8 p-4 border rounded-lg bg-gray-100">
-        <h2 className="text-xl font-bold mb-2">Productos Relacionados en Amazon</h2>
+      <div className="mt-8 p-6 border border-gray-700 rounded-lg bg-gray-700 shadow-md">
+        <h2 className="text-2xl font-bold mb-4 text-purple-300">Productos Relacionados en Amazon</h2>
         <a
-          href={`https://www.amazon.es/s?k=${term.amazonKeywords?.map(keyword => encodeURIComponent(keyword)).join('+')}&tag=YOUR_ASSOCIATE_ID`}
+          href={`https://www.amazon.es/s?k=${term.amazonKeywords?.map(keyword => encodeURIComponent(keyword)).join('+')}&tag=mrpurple0b-21`}
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-block bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 px-4 rounded"
+          className="inline-block bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-3 px-6 rounded-lg text-lg transition-colors duration-300 transform hover:scale-105"
         >
           Buscar productos relacionados en Amazon
         </a>
       </div>
 
-      <div className="mt-8">
-        <h2 className="text-xl font-bold mb-2">Compartir</h2>
-        <p>Botones para compartir en redes sociales.</p>
+      <div className="mt-8 p-6 border border-gray-700 rounded-lg bg-gray-700 shadow-md">
+        <h2 className="text-2xl font-bold mb-4 text-purple-300">Compartir</h2>
+        <p className="text-gray-300">Botones para compartir en redes sociales.</p>
+        {/* TODO: Implement social share buttons */}
       </div>
     </main>
   );

@@ -26,16 +26,16 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${inter.variable} ${robotoMono.variable}`}
+        className={`${inter.variable} ${robotoMono.variable} bg-gray-900 text-gray-100`}
       >
-        <header className="bg-gray-800 text-white p-4">
+        <header className="bg-gray-800 text-white p-4 shadow-lg">
           <nav className="container mx-auto flex justify-between items-center">
-            <Link href="/" className="text-2xl font-bold">
+            <Link href="/" className="text-3xl font-extrabold text-purple-400 hover:text-purple-300 transition-colors duration-300">
               Geek Glossary
             </Link>
           </nav>
         </header>
-        <main className="container mx-auto p-4">
+        <main className="container mx-auto p-6 bg-gray-800 rounded-lg shadow-xl my-8">
           {children}
         </main>
       </body>
