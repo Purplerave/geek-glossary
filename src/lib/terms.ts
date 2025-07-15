@@ -2,7 +2,7 @@ import fs from 'fs';
 import path from 'path';
 import matter from 'gray-matter';
 
-const termsDirectory = path.join(process.cwd(), 'content/terms');
+const termsDirectory = path.join(process.cwd(), 'src', 'content', 'terms');
 
 export function getAllTermSlugs() {
   const fileNames = fs.readdirSync(termsDirectory);
