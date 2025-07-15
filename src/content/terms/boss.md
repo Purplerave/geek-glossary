@@ -2,7 +2,7 @@
 title: Boss
 slug: boss
 description: Un enemigo poderoso y a menudo el clímax de un nivel o sección de un juego. Derrotar a un boss suele requerir estrategia, habilidad y conocimiento de sus patrones de ataque.
-imagePrompt: Una batalla culminante en un videojuego: un guerrero protagonista, herido pero decidido, se enfrenta a un colosal jefe final, quizás un gólem de obsidiana o un demonio escarlata, en una arena dramática. El entorno está lleno de efectos visuales intensos, como explosiones, energía mágica y escombros volando. El jefe tiene una presencia imponente y amenazadora.
+imagePrompt: "Una batalla culminante en un videojuego: un guerrero protagonista, herido pero decidido, se enfrenta a un colosal jefe final, quizás un gólem de obsidiana o un demonio escarlata, en una arena dramática. El entorno está lleno de efectos visuales intensos, como explosiones, energía mágica y escombros volando. El jefe tiene una presencia imponente y amenazadora."
 amazonKeywords: ["jefes finales", "videojuegos", "desafío", "combate", "dificultad"]
 ---
 

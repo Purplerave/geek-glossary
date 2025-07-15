@@ -2,7 +2,7 @@
 title: RPG
 slug: rpg
 description: Género de videojuegos donde los jugadores asumen roles de personajes y desarrollan sus habilidades a través de misiones y exploraciones. Los RPGs ofrecen experiencias narrativas ricas y mundos inmersivos.
-imagePrompt: Una escena épica de un videojuego RPG: un grupo de aventureros (un guerrero, un mago y un pícaro) enfrentándose a un dragón imponente en una mazmorra iluminada por antorchas y cristales brillantes. Se aprecian detalles de armaduras elaboradas, hechizos de energía y el ambiente sombrío de la caverna. El estilo artístico es detallado y de alta fantasía.
+imagePrompt: "Una escena épica de un videojuego RPG: un grupo de aventureros (un guerrero, un mago y un pícaro) enfrentándose a un dragón imponente en una mazmorra iluminada por antorchas y cristales brillantes. Se aprecian detalles de armaduras elaboradas, hechizos de energía y el ambiente sombrío de la caverna. El estilo artístico es detallado y de alta fantasía."
 amazonKeywords: ["juegos de rol", "fantasía épica", "aventura", "videojuegos", "rol"]
 ---
 

@@ -2,7 +2,7 @@
 title: NPC
 slug: npc
 description: Personaje no jugable en videojuegos y juegos de rol, controlado por la IA. Los NPCs dan vida al mundo del juego, ofreciendo misiones, información o actuando como enemigos.
-imagePrompt: Un mercado vibrante en un mundo de fantasía, lleno de NPCs con vestimentas de época: un mercader gruñón con un puesto de armas, un alquimista con un aire misterioso y varios ciudadanos genéricos paseando. Un jugador (invisible) está interactuando con el mercader, cuyo rostro muestra una expresión neutra pero atenta. La atmósfera es animada y llena de vida.
+imagePrompt: "Un mercado vibrante en un mundo de fantasía, lleno de NPCs con vestimentas de época: un mercader gruñón con un puesto de armas, un alquimista con un aire misterioso y varios ciudadanos genéricos paseando. Un jugador (invisible) está interactuando con el mercader, cuyo rostro muestra una expresión neutra pero atenta. La atmósfera es animada y llena de vida."
 amazonKeywords: ["personajes de videojuegos", "inteligencia artificial", "juegos de rol", "mundos virtuales", "jugabilidad"]
 ---
 
