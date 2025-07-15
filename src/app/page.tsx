@@ -1,10 +1,11 @@
 import Link from "next/link";
 import { getAllTermSlugs, getTermData } from "@/lib/terms";
+import { Term } from "@/lib/types";
 
 export default async function Home() {
-  const allTermsData = await Promise.all(
-    getAllTermSlugs().map(async ({ params }) => getTermData(params.slug))
-  );
+  const allTermsData: Term[] = (await Promise.all(
+    getAllTermSlugs().map(async ({ slug }) => getTermData(slug))
+  )).filter(Boolean) as Term[];
 
   return (
     <div className="container mx-auto p-4">
