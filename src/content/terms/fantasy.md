@@ -2,7 +2,7 @@
 title: Fantasy
 slug: fantasy
 description: Género narrativo que se basa en la magia, criaturas míticas y mundos imaginarios. La fantasía explora temas de heroísmo, aventura y la lucha entre el bien y el mal.
-imagePrompt: Un paisaje épico de fantasía: montañas imponentes, un castillo majestuoso en la distancia, un bosque encantado y criaturas míticas como dragones o grifos volando en el cielo. La iluminación es mágica y evoca un sentido de maravilla y aventura.
+imagePrompt: "Un paisaje épico de fantasía: montañas imponentes, un castillo majestuoso en la distancia, un bosque encantado y criaturas míticas como dragones o grifos volando en el cielo. La iluminación es mágica y evoca un sentido de maravilla y aventura."
 amazonKeywords: ["libros de fantasia", "peliculas de fantasia", "videojuegos de fantasia", "alta fantasia", "fantasia epica"]
 ---
 

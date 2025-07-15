@@ -2,7 +2,7 @@
 title: Action
 slug: action
 description: Género narrativo que se centra en la emoción, el movimiento y el conflicto físico. Las historias de acción suelen presentar persecuciones, combates y explosiones, buscando mantener a la audiencia al borde del asiento.
-imagePrompt: Una escena de acción dinámica y explosiva: un héroe saltando por los aires mientras dispara dos armas, con explosiones y escombros volando a su alrededor. El fondo es un paisaje urbano destruido o un entorno de combate intenso. La iluminación es dramática y resalta el movimiento.
+imagePrompt: "Una escena de acción dinámica y explosiva: un héroe saltando por los aires mientras dispara dos armas, con explosiones y escombros volando a su alrededor. El fondo es un paisaje urbano destruido o un entorno de combate intenso. La iluminación es dramática y resalta el movimiento."
 amazonKeywords: ["peliculas de accion", "videojuegos de accion", "libros de accion", "series de accion", "aventura y accion"]
 ---
 

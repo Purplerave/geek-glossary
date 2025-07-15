@@ -2,7 +2,7 @@
 title: Thriller
 slug: thriller
 description: Género narrativo que se centra en generar tensión, suspense y emoción en la audiencia. Los thrillers suelen involucrar peligros inminentes, conspiraciones y giros argumentales inesperados.
-imagePrompt: Una escena de alta tensión: un personaje principal corriendo por un callejón oscuro, perseguido por una figura sombría. La iluminación es dramática, con sombras largas y un uso de colores fríos que aumentan la sensación de peligro y urgencia. El rostro del personaje muestra miedo y determinación.
+imagePrompt: "Una escena de alta tensión: un personaje principal corriendo por un callejón oscuro, perseguido por una figura sombría. La iluminación es dramática, con sombras largas y un uso de colores fríos que aumentan la sensación de peligro y urgencia. El rostro del personaje muestra miedo y determinación."
 amazonKeywords: ["peliculas de thriller", "libros de thriller", "series de thriller", "suspense", "conspiracion"]
 ---
 

@@ -2,7 +2,7 @@
 title: Mystery
 slug: mystery
 description: Género narrativo que se centra en la resolución de un enigma o crimen. Las historias de misterio suelen presentar detectives, pistas y giros argumentales que mantienen al lector en suspenso.
-imagePrompt: Una lupa sobre un mapa antiguo o un documento con pistas crípticas, rodeada de objetos que sugieren un misterio: una linterna, una pluma, un reloj de bolsillo. La iluminación es tenue y crea sombras, evocando una atmósfera de intriga y suspense.
+imagePrompt: "Una lupa sobre un mapa antiguo o un documento con pistas crípticas, rodeada de objetos que sugieren un misterio: una linterna, una pluma, un reloj de bolsillo. La iluminación es tenue y crea sombras, evocando una atmósfera de intriga y suspense."
 amazonKeywords: ["novelas de misterio", "peliculas de misterio", "series de misterio", "detectives", "crimen y misterio"]
 ---
 

@@ -2,7 +2,7 @@
 title: Supernatural
 slug: supernatural
 description: Género narrativo que incorpora elementos que van más allá de las leyes de la naturaleza y la ciencia, como fantasmas, demonios, magia o poderes psíquicos. Lo sobrenatural explora lo inexplicable y lo misterioso.
-imagePrompt: Una escena oscura y misteriosa con elementos sobrenaturales: una figura fantasmal translúcida flotando en un antiguo pasillo, o un objeto levitando con un aura mágica. La iluminación es tenue y crea una atmósfera inquietante, con un toque de lo etéreo y lo inexplicable.
+imagePrompt: "Una escena oscura y misteriosa con elementos sobrenaturales: una figura fantasmal translúcida flotando en un antiguo pasillo, o un objeto levitando con un aura mágica. La iluminación es tenue y crea una atmósfera inquietante, con un toque de lo etéreo y lo inexplicable."
 amazonKeywords: ["horror sobrenatural", "ficcion sobrenatural", "misterio sobrenatural", "magia y fantasmas", "poderes psiquicos"]
 ---
 

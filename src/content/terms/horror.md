@@ -2,7 +2,7 @@
 title: Horror
 slug: horror
 description: Género narrativo que busca provocar miedo, terror y repulsión en la audiencia. Las historias de horror suelen involucrar elementos sobrenaturales, monstruos o situaciones psicológicamente perturbadoras.
-imagePrompt: Una escena oscura y perturbadora: una figura sombría con ojos brillantes acechando en la oscuridad, con un ambiente gótico o abandonado. La iluminación es mínima y crea sombras inquietantes, aumentando la sensación de pavor y misterio.
+imagePrompt: "Una escena oscura y perturbadora: una figura sombría con ojos brillantes acechando en la oscuridad, con un ambiente gótico o abandonado. La iluminación es mínima y crea sombras inquietantes, aumentando la sensación de pavor y misterio."
 amazonKeywords: ["peliculas de terror", "libros de terror", "series de terror", "horror psicologico", "monstruos y criaturas"]
 ---
 
