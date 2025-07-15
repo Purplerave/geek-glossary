@@ -1,4 +1,4 @@
-import { getAllTermSlugs, getTermData } from '@/lib/server-utils';
+import { getAllTermSlugs, getTermData, getAllTermTitlesAndSlugs } from '@/lib/server-utils';
 import { notFound } from 'next/navigation';
 import { Metadata } from 'next';
 import { Term } from '@/lib/types';
@@ -31,7 +31,8 @@ export default async function TermPage({ params }: PageProps) {
     notFound();
   }
 
-  const contentHtml = await processMarkdownToHtml(term.content);
+  const allTerms = await getAllTermTitlesAndSlugs();
+  const contentHtml = await processMarkdownToHtml(term.content, allTerms);
 
   return (
     <main className="p-6 bg-gray-800 rounded-lg shadow-xl">

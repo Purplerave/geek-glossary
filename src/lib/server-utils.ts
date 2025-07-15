@@ -42,3 +42,17 @@ export async function getAllTermsForSearchIndex(): Promise<Array<{ slug: string;
       description,
     }));
 }
+
+export async function getAllTermTitlesAndSlugs(): Promise<Array<{ title: string; slug: string }>> {
+  const slugs = getAllTermSlugs();
+  const allTermsData = await Promise.all(
+    slugs.map(async ({ slug }) => getTermData(slug))
+  );
+
+  return allTermsData
+    .filter((term): term is Term => term !== undefined)
+    .map(({ title, slug }) => ({
+      title,
+      slug,
+    }));
+}
