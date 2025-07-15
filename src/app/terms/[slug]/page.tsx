@@ -3,6 +3,7 @@ import { notFound } from 'next/navigation';
 import { Metadata } from 'next';
 import { Term } from '@/lib/types';
 import { processMarkdownToHtml } from '@/lib/terms';
+import Link from "next/link";
 
 type PageProps = {
   params: {
@@ -33,6 +34,7 @@ export default async function TermPage({ params }: PageProps) {
 
   const allTerms = await getAllTermTitlesAndSlugs();
   const contentHtml = await processMarkdownToHtml(term.content, allTerms);
+  const relatedTerms = getRandomRelatedTerms(allTerms, params.slug, 5);
 
   return (
     <main className="p-6 bg-gray-800 rounded-lg shadow-xl">
@@ -58,6 +60,25 @@ export default async function TermPage({ params }: PageProps) {
         <p className="text-gray-300">Botones para compartir en redes sociales.</p>
         {/* TODO: Implement social share buttons */}
       </div>
+
+      <div className="mt-8 p-6 border border-gray-700 rounded-lg bg-gray-700 shadow-md">
+        <h2 className="text-2xl font-bold mb-4 text-purple-300">Ver También</h2>
+        <ul className="list-disc list-inside text-gray-300">
+          {relatedTerms.map((relatedTerm) => (
+            <li key={relatedTerm.slug}>
+              <Link href={`/terms/${relatedTerm.slug}`} className="text-purple-200 hover:underline">
+                {relatedTerm.title}
+              </Link>
+            </li>
+          ))}
+        </ul>
+      </div>
     </main>
   );
+}
+
+function getRandomRelatedTerms(allTerms: Array<{ title: string; slug: string }>, currentSlug: string, count: number) {
+  const filteredTerms = allTerms.filter(term => term.slug !== currentSlug);
+  const shuffled = filteredTerms.sort(() => 0.5 - Math.random());
+  return shuffled.slice(0, count);
 }
