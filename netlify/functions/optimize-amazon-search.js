@@ -17,7 +17,7 @@ exports.handler = async function(event, context) {
   }
 
   const OPENROUTER_API_KEY = process.env.OPENROUTER_API_KEY;
-  const OPENROUTER_MODEL = "mistralai/mistral-7b-instruct-v0.2"; // Modelo gratuito de OpenRouter.ai (cambiado a Mistral)
+  const OPENROUTER_MODEL = "google/gemma-3-27b-it:free"; // Modelo gratuito de OpenRouter.ai (Gemma 3)
 
   if (!OPENROUTER_API_KEY) {
     return { statusCode: 500, body: "OpenRouter API Key not configured." };
@@ -39,8 +39,11 @@ Ejemplos:
 - Término: "Distopía" → {"relevant": false}
 - Término: "Cosplay" → {"relevant": true, "optimizedSearchString": "disfraces cosplay anime mujer"}
 - Término: "Fan Fiction" → {"relevant": true, "optimizedSearchString": "libros fanfiction escritura"}
+- Término: "Lore" → {"relevant": true, "optimizedSearchString": "libros lore fantasia universo"}
+- Término: "NPC" → {"relevant": true, "optimizedSearchString": "figuras npc videojuegos"}
+- Término: "Ninja" → {"relevant": true, "optimizedSearchString": "disfraz ninja infantil"}
 
-Si no estás seguro de la relevancia, responde {"relevant": false}.`
+Si no estás seguro de la relevancia, responde {"relevant": false}.
     },
     {
       role: "user",
