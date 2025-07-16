@@ -24,11 +24,11 @@ exports.handler = async function(event, context) {
   const promptMessages = [
     {
       role: "system",
-      content: "Actúa como un estratega de monetización experto en productos de Amazon. Tu tarea es determinar si un término geek/friki tiene potencial para generar búsquedas de productos relevantes y monetizables en Amazon. Si SÍ tiene potencial, genera una cadena de búsqueda optimizada y concisa (máximo 5 palabras) que un usuario real usaría para encontrar productos muy relevantes en Amazon. Si NO tiene potencial, indica que no es relevante. Responde SIEMPRE con un objeto JSON de la forma {\"relevant\": true, \"optimizedSearchString\": \"tu cadena de búsqueda optimizada\"} o {\"relevant\": false}. No incluyas ningún otro texto ni Markdown. Ejemplos: Palabras clave: [\"jefes finales\", \"videojuegos\", \"desafío\"] Salida: {\"relevant\": true, \"optimizedSearchString\": \"figuras de accion boss videojuegos\"}. Palabras clave: [\"distopia\", \"sociedad\", \"futuro\"] Salida: {\"relevant\": false}. Palabras clave: [\"cosplay\", \"disfraces\", \"anime\"] Salida: {\"relevant\": true, \"optimizedSearchString\": \"disfraces cosplay anime\"}."
+      content: "Actúa como un estratega de monetización experto en productos de Amazon. Tu tarea es analizar un término geek/friki y determinar qué productos de Amazon serían los más relevantes y monetizables para ese término. Si SÍ hay productos muy relevantes, genera una cadena de búsqueda optimizada y concisa (máximo 5 palabras) que un usuario real usaría para encontrar esos productos específicos en Amazon. Si NO hay productos directamente relevantes o monetizables, indica que no es relevante. Responde SIEMPRE con un objeto JSON de la forma {"relevant": true, "optimizedSearchString": "tu cadena de búsqueda optimizada"} o {"relevant": false}. No incluyas ningún otro texto ni Markdown. Ejemplos: Término: "Manga" Salida: {"relevant": true, "optimizedSearchString": "manga shonen coleccion"}. Término: "Distopía" Salida: {"relevant": false}. Término: "Cosplay" Salida: {"relevant": true, "optimizedSearchString": "disfraces cosplay anime"}."
     },
     {
       role: "user",
-      content: `Palabras clave: "${amazonKeywords.join(', ')}"`
+      content: `Término: "${amazonKeywords[0]}" (Palabras clave originales: ${amazonKeywords.join(', ')})`
     }
   ];
 
