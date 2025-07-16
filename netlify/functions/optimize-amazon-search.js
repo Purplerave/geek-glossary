@@ -12,7 +12,7 @@ exports.handler = async function(event, context) {
   }
 
   const genAI = new GoogleGenerativeAI(process.env.GOOGLE_AI_STUDIO_API_KEY);
-  const model = genAI.getGenerativeModel({ model: "gemini-pro" }); // Puedes cambiar el modelo si lo deseas
+  const model = genAI.getGenerativeModel({ model: "gemini-1.5-pro" }); // Cambiado a gemini-1.5-pro
 
   const prompt = `Actúa como un estratega de monetización experto en productos de Amazon.
   Analiza las siguientes palabras clave relacionadas con un término geek/friki: "${amazonKeywords.join(', ')}".
