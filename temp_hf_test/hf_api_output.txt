@@ -1,3 +1,0 @@
---- INICIO DEL SCRIPT ---
-ERROR: Por favor, reemplaza 'TU_TOKEN_DE_HUGGING_FACE' con tu token real de Hugging Face.
---- FIN DEL SCRIPT (ERROR DE TOKEN) ---
