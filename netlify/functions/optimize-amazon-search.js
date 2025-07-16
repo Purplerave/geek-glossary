@@ -1,4 +1,4 @@
-
+const fetch = require('node-fetch'); // Node.js 18+ has fetch built-in, but for Netlify compatibility, it's safer to require it.
 
 exports.handler = async function(event, context) {
   if (event.httpMethod !== "POST") {
@@ -11,60 +11,55 @@ exports.handler = async function(event, context) {
     return { statusCode: 400, body: "Missing or invalid amazonKeywords" };
   }
 
-  const HF_API_TOKEN = process.env.HF_API_TOKEN;
-  const HF_MODEL = "google/flan-t5-small"; // Modelo de LLM en Hugging Face (cambiado a Flan-T5-Small)
+  const OPENROUTER_API_KEY = process.env.OPENROUTER_API_KEY;
+  const OPENROUTER_MODEL = "google/gemma-7b-it:free"; // Modelo gratuito de OpenRouter.ai
 
-  if (!HF_API_TOKEN) {
-    return { statusCode: 500, body: "Hugging Face API Token not configured." };
+  if (!OPENROUTER_API_KEY) {
+    return { statusCode: 500, body: "OpenRouter API Key not configured." };
   }
 
-  const prompt = `Actúa como un estratega de monetización experto en productos de Amazon.
-  Analiza las siguientes palabras clave relacionadas con un término geek/friki: "${amazonKeywords.join(', ')}".
-
-  Tu tarea es determinar si este término tiene potencial para generar búsquedas de productos relevantes y monetizables en Amazon.
-
-  Si SÍ tiene potencial:
-  Genera una cadena de búsqueda optimizada y concisa (máximo 5 palabras) que un usuario real usaría para encontrar productos muy relevantes en Amazon. Piensa en productos específicos o categorías de productos que se asocien directamente con estas palabras clave.
-  Formato de salida: {"relevant": true, "optimizedSearchString": "tu cadena de búsqueda optimizada"}
-
-  Si NO tiene potencial (es decir, las palabras clave son demasiado genéricas, abstractas, o no se asocian directamente con productos vendibles en Amazon):
-  Formato de salida: {"relevant": false}
-
-  Ejemplos:
-  Palabras clave: ["jefes finales", "videojuegos", "desafío"]
-  Salida: {"relevant": true, "optimizedSearchString": "figuras de accion boss videojuegos"}
-
-  Palabras clave: ["distopia", "sociedad", "futuro"]
-  Salida: {"relevant": false}
-
-  Palabras clave: ["cosplay", "disfraces", "anime"]
-  Salida: {"relevant": true, "optimizedSearchString": "disfraces cosplay anime"}
-
-  Palabras clave: "${amazonKeywords.join(', ')}"
-  Salida:`;
+  const promptMessages = [
+    {
+      role: "system",
+      content: "Actúa como un estratega de monetización experto en productos de Amazon. Tu tarea es determinar si un término geek/friki tiene potencial para generar búsquedas de productos relevantes y monetizables en Amazon. Si SÍ tiene potencial, genera una cadena de búsqueda optimizada y concisa (máximo 5 palabras) que un usuario real usaría para encontrar productos muy relevantes en Amazon. Si NO tiene potencial, indica que no es relevante. Responde SIEMPRE con un objeto JSON de la forma {\"relevant\": true, \"optimizedSearchString\": \"tu cadena de búsqueda optimizada\"} o {\"relevant\": false}. No incluyas ningún otro texto ni Markdown. Ejemplos: Palabras clave: [\"jefes finales\", \"videojuegos\", \"desafío\"] Salida: {\"relevant\": true, \"optimizedSearchString\": \"figuras de accion boss videojuegos\"}. Palabras clave: [\"distopia\", \"sociedad\", \"futuro\"] Salida: {\"relevant\": false}. Palabras clave: [\"cosplay\", \"disfraces\", \"anime\"] Salida: {\"relevant\": true, \"optimizedSearchString\": \"disfraces cosplay anime\"}."
+    },
+    {
+      role: "user",
+      content: `Palabras clave: "${amazonKeywords.join(', ')}"`
+    }
+  ];
 
   try {
-    const response = await fetch(`https://api-inference.huggingface.co/models/${HF_MODEL}`,
-      {
-        headers: { Authorization: `Bearer ${HF_API_TOKEN}` },
-        method: "POST",
-        body: JSON.stringify({ inputs: prompt, parameters: { max_new_tokens: 50, return_full_text: false } }),
-      }
-    );
+    const response = await fetch("https://openrouter.ai/api/v1/chat/completions", {
+      method: "POST",
+      headers: {
+        "Authorization": `Bearer ${OPENROUTER_API_KEY}`,
+        "Content-Type": "application/json",
+        "HTTP-Referer": "https://your-site-name.netlify.app", // Reemplaza con la URL de tu sitio Netlify
+        "X-Title": "Geek Glossary Amazon Optimizer",
+      },
+      body: JSON.stringify({
+        model: OPENROUTER_MODEL,
+        messages: promptMessages,
+        max_tokens: 50,
+        response_format: { type: "json_object" }, // Solicitar salida JSON
+      }),
+    });
 
     if (!response.ok) {
       const errorBody = await response.text();
-      throw new Error(`Hugging Face API error! status: ${response.status}, body: ${errorBody}`);
+      throw new Error(`OpenRouter API error! status: ${response.status}, body: ${errorBody}`);
     }
 
     const result = await response.json();
-    const generatedText = result[0]?.generated_text || "";
+    const generatedText = result.choices[0]?.message?.content || "";
 
-    // Intentar parsear el JSON. La IA puede añadir texto extra.
     let parsedResponse;
     try {
       parsedResponse = JSON.parse(generatedText.trim());
     } catch (jsonError) {
+      console.error("Error parsing AI response JSON:", jsonError);
+      // Fallback si la IA no devuelve JSON perfecto
       const jsonMatch = generatedText.match(/\{[^]*\}/);
       if (jsonMatch) {
         parsedResponse = JSON.parse(jsonMatch[0]);
@@ -78,7 +73,7 @@ exports.handler = async function(event, context) {
       body: JSON.stringify(parsedResponse),
     };
   } catch (error) {
-    console.error("Error calling Hugging Face API:", error);
+    console.error("Error calling OpenRouter API:", error);
     return {
       statusCode: 500,
       body: JSON.stringify({ error: "Failed to optimize search string", details: error.message }),
