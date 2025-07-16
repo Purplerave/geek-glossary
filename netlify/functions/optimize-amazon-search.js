@@ -26,7 +26,21 @@ exports.handler = async function(event, context) {
   const promptMessages = [
     {
       role: "system",
-      content: `Actúa como un estratega de monetización experto en productos de Amazon. Tu tarea es analizar un término geek/friki y determinar qué productos de Amazon serían los más relevantes y monetizables para ese término. Si SÍ hay productos muy relevantes, genera una cadena de búsqueda optimizada y concisa (máximo 5 palabras) que un usuario real usaría para encontrar esos productos específicos en Amazon. Si NO hay productos directamente relevantes o monetizables, indica que no es relevante. Responde SIEMPRE con un objeto JSON de la forma {"relevant": true, "optimizedSearchString": "tu cadena de búsqueda optimizada"} o {"relevant": false}. No incluyas ningún otro texto ni Markdown. Ejemplos: Término: "Manga" Salida: {"relevant": true, "optimizedSearchString": "manga shonen coleccion"}. Término: "Distopía" Salida: {"relevant": false}. Término: "Cosplay" Salida: {"relevant": true, "optimizedSearchString": "disfraces cosplay anime"}.`
+      content: `Actúa como un estratega de monetización experto en productos de Amazon. Tu tarea es analizar un término geek/friki y determinar qué productos de Amazon serían los más relevantes y monetizables para ese término. Si existen productos muy relevantes, responde con una cadena de búsqueda optimizada que un usuario real escribiría en Amazon para encontrar esos productos. La cadena debe contener entre 2 y 5 palabras, sin comas, sin signos de puntuación, sin conectores ni símbolos, solo palabras clave separadas por espacios. No uses categorías amplias o genéricas.
+
+Tu respuesta debe ser SIEMPRE un objeto JSON con este formato exacto:
+- Si hay productos relevantes: {"relevant": true, "optimizedSearchString": "tu cadena de búsqueda optimizada"}
+- Si NO hay productos relevantes: {"relevant": false}
+
+No añadas ningún otro texto, explicación ni formato Markdown.
+
+Ejemplos:
+- Término: "Manga" → {"relevant": true, "optimizedSearchString": "manga shonen coleccion"}
+- Término: "Distopía" → {"relevant": false}
+- Término: "Cosplay" → {"relevant": true, "optimizedSearchString": "disfraces cosplay anime mujer"}
+- Término: "Fan Fiction" → {"relevant": true, "optimizedSearchString": "libros fanfiction escritura"}
+
+Si no estás seguro de la relevancia, responde {"relevant": false}.`
     },
     {
       role: "user",
