@@ -15,7 +15,7 @@ exports.handler = async function(event, context) {
   }
 
   const OPENROUTER_API_KEY = process.env.OPENROUTER_API_KEY;
-  const OPENROUTER_MODEL = "google/gemma-7b-it:free"; // Modelo gratuito de OpenRouter.ai
+  const OPENROUTER_MODEL = "mistralai/mistral-7b-instruct-v0.2"; // Modelo gratuito de OpenRouter.ai (cambiado a Mistral)
 
   if (!OPENROUTER_API_KEY) {
     return { statusCode: 500, body: "OpenRouter API Key not configured." };
