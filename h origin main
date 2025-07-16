@@ -1,0 +1,44 @@
+[33m0ec3f39[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m)[m Fix: Change Hugging Face model to google/flan-t5-small
+[33mcf3e207[m Fix: Change Hugging Face model to google/flan-t5-small
+[33m2c860ab[m Fix: Change Hugging Face model to google/flan-t5-xxl
+[33mbd5f962[m Fix: Change Hugging Face model to HuggingFaceH4/zephyr-7b-beta
+[33mab736f5[m Fix: Remove node-fetch require from Netlify Function, rely on global fetch
+[33ma025493[m Integrate Hugging Face Inference API for Amazon search optimization
+[33m6909e34[m Fix: Update Gemini model to gemini-1.5-pro in Netlify Function
+[33mdf67dc2[m Feature: Add See Also section and Amazon AI optimization
+[33mf013c35[m ImplementFeaturesAndVisuals
+[33m80f69f8[m InternalHyperlinks
+[33mb5a0c8e[m ImplementFuzzySearch
+[33m4bd3690[m Improve visual design and update Amazon Associate ID
+[33m54a7e40[m Implement search and refactor components
+[33m62879be[m NewTerms
+[33me61960a[m Fix: Add quotes to imagePrompt in action.md, fantasy.md, horror.md, mystery.md, supernatural.md, thriller.md to resolve YAMLException
+[33m618d1f1[m Fix: Add quotes to imagePrompt in boss.md, npc.md, rpg.md to resolve YAMLException
+[33m593ef8b[m Add first batch of 10 geek terms from JSON list
+[33m78fe898[m Add multiple new geek terms (Otaku, Cosplay, Manga, Anime, RPG)
+[33md2209c6[m Fix: Explicitly type allTermsData in page.tsx for correct TypeScript inference
+[33m9e40b03[m Apply comprehensive fixes from external AI review (fonts, npm audit, SSG config)
+[33m82efc98[m Apply comprehensive fixes from external AI review (dependencies, types, SSG config)
+[33mf45151c[m Fix: Downgrade ESLint to 8.x for eslint-config-next 14 compatibility
+[33mb5d8352[m Downgrade Next.js to 14.2.5 to resolve Netlify build issues
+[33m6c015be[m Add netlify.toml to configure experimental Next.js runtime
+[33m2c830f6[m Fix: Correct termsDirectory path in src/lib/terms.ts
+[33mdc008df[m Fix: Apply ChatGPT's definitive solution for generateStaticParams and types
+[33m2bf206c[m Fix: Implement direct solution for generateStaticParams type incompatibility
+[33mda1bc7d[m Fix: Apply external AI's recommended type corrections for generateStaticParams and getAllTermSlugs
+[33m8f29f5a[m Fix: Revert getAllTermSlugs to original format and ensure generateStaticParams uses it directly
+[33m2b4010c[m Fix: Simplify getAllTermSlugs return and generateStaticParams consumption
+[33m555dcd1[m Fix: Correct generateStaticParams return format and use getAllTermSlugs
+[33m728eb11[m Fix: Hardcode generateStaticParams return for Netlify build test
+[33mf292256[m Fix: Specify exact Node.js LTS version 20.11.1 in .nvmrc for Netlify
+[33m9713d69[m Fix: Update .nvmrc to 20.x for Netlify build
+[33m2b6b149[m Fix: Temporarily set generateStaticParams return type to any[] for Netlify build
+[33m64fd294[m Fix: Explicitly type generateStaticParams return for Netlify build
+[33m220be4b[m Fix: Revert generateStaticParams mapping, use direct output from getAllTermSlugs
+[33mac388e8[m Fix: Import Link component in layout.tsx
+[33mfc57fd1[m Fix: Correct generateStaticParams return format for Netlify build
+[33mddac604[m Fix: Use Next.js Link component for internal navigation in layout
+[33m9d53586[m Fix: Specify Node.js version 20 via .nvmrc for Netlify
+[33m61e17a9[m Fix: Add searchParams to Props type in dynamic page
+[33m9ee78a0[m Initial commit: Geek Glossary project setup
+[33m6d1d279[m Initial commit from Create Next App
