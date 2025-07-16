@@ -30,6 +30,10 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
 // ... (resto del código)
 
+import AmazonProductDisplay from "@/components/AmazonProductDisplay";
+
+// ... (resto del código)
+
 export default async function TermPage({ params }: PageProps) {
   const term = getTermData(params.slug) as Term | undefined;
 
@@ -41,6 +45,22 @@ export default async function TermPage({ params }: PageProps) {
   const contentHtml = await processMarkdownToHtml(term.content, allTerms);
   const relatedTerms = getRandomRelatedTerms(allTerms, params.slug, 5);
 
+  let optimizedSearchData: { relevant: boolean; optimizedSearchString?: string; error?: string } = { relevant: false };
+  try {
+    const response = await fetch("/.netlify/functions/optimize-amazon-search", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ amazonKeywords: term.amazonKeywords }),
+    });
+    if (response.ok) {
+      optimizedSearchData = await response.json();
+    } else {
+      optimizedSearchData.error = `HTTP error! status: ${response.status}`;
+    }
+  } catch (error: any) {
+    optimizedSearchData.error = `Error calling Netlify Function: ${error.message}`;
+  }
+
   return (
     <main className="p-6 bg-gray-800 rounded-lg shadow-xl">
       <h1 className="text-4xl font-extrabold mb-4 text-purple-400">{term.title}</h1>
@@ -49,28 +69,8 @@ export default async function TermPage({ params }: PageProps) {
       </article>
 
       <div className="mt-8 p-6 border border-gray-700 rounded-lg bg-gray-700 shadow-md">
-        <h2 className="text-2xl font-bold mb-4 text-purple-300">Productos Relacionados en Amazon</h2>
-        {term.optimizedAmazonSearch ? (
-          <a
-            href={`https://www.amazon.es/s?k=${encodeURIComponent(term.optimizedAmazonSearch)}&tag=mrpurple0b-21`}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-block bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-3 px-6 rounded-lg text-lg transition-colors duration-300 transform hover:scale-105"
-          >
-            Buscar productos relacionados en Amazon: {term.optimizedAmazonSearch}
-          </a>
-        ) : term.amazonKeywords && term.amazonKeywords.length > 0 ? (
-          <a
-            href={`https://www.amazon.es/s?k=${term.amazonKeywords.map(keyword => encodeURIComponent(keyword)).join('+')}&tag=mrpurple0b-21`}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-block bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-3 px-6 rounded-lg text-lg transition-colors duration-300 transform hover:scale-105"
-          >
-            Buscar productos relacionados en Amazon
-          </a>
-        ) : (
-          <p className="text-gray-300">No hay productos de Amazon directamente relevantes para este término.</p>
-        )}
+        <h2 className="text-2xl font-bold mb-4 text-purple-300">Respuesta de la IA para Amazon</h2>
+        <pre className="text-gray-300 text-sm whitespace-pre-wrap break-words">{JSON.stringify(optimizedSearchData, null, 2)}</pre>
       </div>
 
       <div className="mt-8 p-6 border border-gray-700 rounded-lg bg-gray-700 shadow-md">
@@ -94,6 +94,7 @@ export default async function TermPage({ params }: PageProps) {
     </main>
   );
 }
+
 
 
 
