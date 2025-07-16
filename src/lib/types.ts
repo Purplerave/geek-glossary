@@ -5,6 +5,7 @@ export interface Term {
   content: string;
   imagePrompt?: string;
   amazonKeywords?: string[];
+  optimizedAmazonSearch?: string;
 }
 
 export interface SearchTerm {

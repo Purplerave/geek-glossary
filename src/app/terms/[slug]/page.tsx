@@ -50,7 +50,27 @@ export default async function TermPage({ params }: PageProps) {
 
       <div className="mt-8 p-6 border border-gray-700 rounded-lg bg-gray-700 shadow-md">
         <h2 className="text-2xl font-bold mb-4 text-purple-300">Productos Relacionados en Amazon</h2>
-        <p className="text-gray-300">La integración de productos de Amazon está temporalmente deshabilitada.</p>
+        {term.optimizedAmazonSearch ? (
+          <a
+            href={`https://www.amazon.es/s?k=${encodeURIComponent(term.optimizedAmazonSearch)}&tag=mrpurple0b-21`}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-block bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-3 px-6 rounded-lg text-lg transition-colors duration-300 transform hover:scale-105"
+          >
+            Buscar productos relacionados en Amazon: {term.optimizedAmazonSearch}
+          </a>
+        ) : term.amazonKeywords && term.amazonKeywords.length > 0 ? (
+          <a
+            href={`https://www.amazon.es/s?k=${term.amazonKeywords.map(keyword => encodeURIComponent(keyword)).join('+')}&tag=mrpurple0b-21`}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-block bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-3 px-6 rounded-lg text-lg transition-colors duration-300 transform hover:scale-105"
+          >
+            Buscar productos relacionados en Amazon
+          </a>
+        ) : (
+          <p className="text-gray-300">No hay productos de Amazon directamente relevantes para este término.</p>
+        )}
       </div>
 
       <div className="mt-8 p-6 border border-gray-700 rounded-lg bg-gray-700 shadow-md">
