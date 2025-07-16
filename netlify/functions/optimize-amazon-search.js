@@ -12,7 +12,7 @@ exports.handler = async function(event, context) {
   }
 
   const HF_API_TOKEN = process.env.HF_API_TOKEN;
-  const HF_MODEL = "mistralai/Mistral-7B-Instruct-v0.2"; // Modelo de LLM en Hugging Face
+  const HF_MODEL = "HuggingFaceH4/zephyr-7b-beta"; // Modelo de LLM en Hugging Face (cambiado)
 
   if (!HF_API_TOKEN) {
     return { statusCode: 500, body: "Hugging Face API Token not configured." };
