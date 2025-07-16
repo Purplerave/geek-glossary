@@ -10,6 +10,7 @@ interface AmazonProductDisplayProps {
 interface OptimizedSearchData {
   relevant: boolean;
   optimizedSearchString?: string;
+  error?: string; // Para mostrar errores de la función
 }
 
 export default function AmazonProductDisplay({ amazonKeywords, associateId }: AmazonProductDisplayProps) {
@@ -27,7 +28,8 @@ export default function AmazonProductDisplay({ amazonKeywords, associateId }: Am
         });
 
         if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
+          const errorBody = await response.text();
+          throw new Error(`HTTP error! status: ${response.status}, body: ${errorBody}`);
         }
 
         const data: OptimizedSearchData = await response.json();

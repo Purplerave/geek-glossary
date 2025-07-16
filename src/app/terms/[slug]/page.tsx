@@ -45,22 +45,6 @@ export default async function TermPage({ params }: PageProps) {
   const contentHtml = await processMarkdownToHtml(term.content, allTerms);
   const relatedTerms = getRandomRelatedTerms(allTerms, params.slug, 5);
 
-  let optimizedSearchData: { relevant: boolean; optimizedSearchString?: string; error?: string } = { relevant: false };
-  try {
-    const response = await fetch("/.netlify/functions/optimize-amazon-search", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ amazonKeywords: term.amazonKeywords }),
-    });
-    if (response.ok) {
-      optimizedSearchData = await response.json();
-    } else {
-      optimizedSearchData.error = `HTTP error! status: ${response.status}`;
-    }
-  } catch (error: any) {
-    optimizedSearchData.error = `Error calling Netlify Function: ${error.message}`;
-  }
-
   return (
     <main className="p-6 bg-gray-800 rounded-lg shadow-xl">
       <h1 className="text-4xl font-extrabold mb-4 text-purple-400">{term.title}</h1>
@@ -68,10 +52,7 @@ export default async function TermPage({ params }: PageProps) {
         <div dangerouslySetInnerHTML={{ __html: contentHtml }} />
       </article>
 
-      <div className="mt-8 p-6 border border-gray-700 rounded-lg bg-gray-700 shadow-md">
-        <h2 className="text-2xl font-bold mb-4 text-purple-300">Respuesta de la IA para Amazon</h2>
-        <pre className="text-gray-300 text-sm whitespace-pre-wrap break-words">{JSON.stringify(optimizedSearchData, null, 2)}</pre>
-      </div>
+      <AmazonProductDisplay amazonKeywords={term.amazonKeywords || []} associateId="mrpurple0b-21" />
 
       <div className="mt-8 p-6 border border-gray-700 rounded-lg bg-gray-700 shadow-md">
         <h2 className="text-2xl font-bold mb-4 text-purple-300">Compartir</h2>
