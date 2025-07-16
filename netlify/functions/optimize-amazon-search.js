@@ -1,4 +1,4 @@
-const { GoogleGenerativeAI } = require("@google/generative-ai");
+const fetch = require('node-fetch'); // Node.js 18+ has fetch built-in, but for Netlify compatibility, it's safer to require it.
 
 exports.handler = async function(event, context) {
   if (event.httpMethod !== "POST") {
@@ -11,8 +11,12 @@ exports.handler = async function(event, context) {
     return { statusCode: 400, body: "Missing or invalid amazonKeywords" };
   }
 
-  const genAI = new GoogleGenerativeAI(process.env.GOOGLE_AI_STUDIO_API_KEY);
-  const model = genAI.getGenerativeModel({ model: "gemini-1.5-pro" }); // Cambiado a gemini-1.5-pro
+  const HF_API_TOKEN = process.env.HF_API_TOKEN;
+  const HF_MODEL = "mistralai/Mistral-7B-Instruct-v0.2"; // Modelo de LLM en Hugging Face
+
+  if (!HF_API_TOKEN) {
+    return { statusCode: 500, body: "Hugging Face API Token not configured." };
+  }
 
   const prompt = `Actúa como un estratega de monetización experto en productos de Amazon.
   Analiza las siguientes palabras clave relacionadas con un término geek/friki: "${amazonKeywords.join(', ')}".
@@ -40,17 +44,28 @@ exports.handler = async function(event, context) {
   Salida:`;
 
   try {
-    const result = await model.generateContent(prompt);
-    const response = await result.response;
-    const text = response.text();
+    const response = await fetch(`https://api-inference.huggingface.co/models/${HF_MODEL}`,
+      {
+        headers: { Authorization: `Bearer ${HF_API_TOKEN}` },
+        method: "POST",
+        body: JSON.stringify({ inputs: prompt, parameters: { max_new_tokens: 50, return_full_text: false } }),
+      }
+    );
 
-    // Intentar parsear el JSON. A veces la IA puede añadir texto extra.
+    if (!response.ok) {
+      const errorBody = await response.text();
+      throw new Error(`Hugging Face API error! status: ${response.status}, body: ${errorBody}`);
+    }
+
+    const result = await response.json();
+    const generatedText = result[0]?.generated_text || "";
+
+    // Intentar parsear el JSON. La IA puede añadir texto extra.
     let parsedResponse;
     try {
-      parsedResponse = JSON.parse(text.trim());
+      parsedResponse = JSON.parse(generatedText.trim());
     } catch (jsonError) {
-      // Si no es JSON puro, intentar extraerlo si la IA lo envolvió
-      const jsonMatch = text.match(/\{[^]*\}/);
+      const jsonMatch = generatedText.match(/\{[^]*\}/);
       if (jsonMatch) {
         parsedResponse = JSON.parse(jsonMatch[0]);
       } else {
@@ -63,7 +78,7 @@ exports.handler = async function(event, context) {
       body: JSON.stringify(parsedResponse),
     };
   } catch (error) {
-    console.error("Error calling Google AI Studio:", error);
+    console.error("Error calling Hugging Face API:", error);
     return {
       statusCode: 500,
       body: JSON.stringify({ error: "Failed to optimize search string", details: error.message }),
