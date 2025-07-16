@@ -1,5 +1,7 @@
 const fetch = require('node-fetch'); // Node.js 18+ has fetch built-in, but for Netlify compatibility, it's safer to require it.
 
+const fetch = require('node-fetch'); // Node.js 18+ has fetch built-in, but for Netlify compatibility, it's safer to require it.
+
 exports.handler = async function(event, context) {
   console.log("Function optimize-amazon-search started.");
   if (event.httpMethod !== "POST") {
