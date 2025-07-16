@@ -2,6 +2,8 @@
 
 
 
+const fetch = require('node-fetch');
+
 exports.handler = async function(event, context) {
   console.log("Function optimize-amazon-search started.");
   if (event.httpMethod !== "POST") {
