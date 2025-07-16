@@ -12,7 +12,7 @@ exports.handler = async function(event, context) {
   }
 
   const HF_API_TOKEN = process.env.HF_API_TOKEN;
-  const HF_MODEL = "google/flan-t5-xxl"; // Modelo de LLM en Hugging Face (cambiado a Flan-T5-XXL)
+  const HF_MODEL = "google/flan-t5-small"; // Modelo de LLM en Hugging Face (cambiado a Flan-T5-Small)
 
   if (!HF_API_TOKEN) {
     return { statusCode: 500, body: "Hugging Face API Token not configured." };

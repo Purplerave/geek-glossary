@@ -26,7 +26,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   };
 }
 
-import AmazonProductDisplay from "@/components/AmazonProductDisplay";
+
 
 // ... (resto del código)
 
@@ -48,7 +48,10 @@ export default async function TermPage({ params }: PageProps) {
         <div dangerouslySetInnerHTML={{ __html: contentHtml }} />
       </article>
 
-      <AmazonProductDisplay amazonKeywords={term.amazonKeywords || []} associateId="mrpurple0b-21" />
+      <div className="mt-8 p-6 border border-gray-700 rounded-lg bg-gray-700 shadow-md">
+        <h2 className="text-2xl font-bold mb-4 text-purple-300">Productos Relacionados en Amazon</h2>
+        <p className="text-gray-300">La integración de productos de Amazon está temporalmente deshabilitada.</p>
+      </div>
 
       <div className="mt-8 p-6 border border-gray-700 rounded-lg bg-gray-700 shadow-md">
         <h2 className="text-2xl font-bold mb-4 text-purple-300">Compartir</h2>

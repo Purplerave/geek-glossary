@@ -1,0 +1,2 @@
+¡Hola desde Node.js!
+Este es un mensaje de error de prueba.
