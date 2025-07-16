@@ -47,7 +47,7 @@ Si no estás seguro de la relevancia, responde {"relevant": false}.
     },
     {
       role: "user",
-      content: `Término: ${amazonKeywords[0]} (Palabras clave originales: ${amazonKeywords.join(', ')})`
+      content: `Analiza el término: ${amazonKeywords[0]}. Palabras clave originales: ${amazonKeywords.join(', ')}`
     }
   ];
 
