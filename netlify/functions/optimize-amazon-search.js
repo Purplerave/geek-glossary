@@ -1,4 +1,4 @@
-const fetch = require('node-fetch'); // Node.js 18+ has fetch built-in, but for Netlify compatibility, it's safer to require it.
+
 
 exports.handler = async function(event, context) {
   if (event.httpMethod !== "POST") {
